@@ -89,7 +89,7 @@ const Home = () => {
           />
         </Head>
 
-        {data.length && (
+        {!!data.length && (
           <div className="my-4 px-8 py-3 sticky top-0 bg-white/70 z-10 rounded-b-xl">
             <label className="block">
               <input
