@@ -39,9 +39,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log('loadingData', loadingData);
     if (loadingData) {
-      console.log('calling Fetch');
       fetchData();
     }
   }, [loadingData]);
