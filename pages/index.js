@@ -18,6 +18,7 @@ const breakpointColumnsObj = {
 };
 
 const Home = () => {
+  const [query, setQuery] = useState('');
   const [data, setData] = useState([]);
   const [loadingData, setLoadingData] = useState(true);
 
@@ -54,6 +55,10 @@ const Home = () => {
     setLoadingData(false);
   };
 
+  const handleQueryChange = (e) => {
+    setQuery(e.target.value);
+  };
+
   return (
     <>
       <div>
@@ -74,14 +79,42 @@ const Home = () => {
             <Loader />
           ) : (
             <section>
+              <div className="container mb-8">
+                <label className="block">
+                  <input
+                    type="text"
+                    value={query}
+                    onChange={handleQueryChange}
+                    name="query"
+                    className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                    placeholder="Search Here"
+                  />
+                </label>
+              </div>
               <Masonry
                 breakpointCols={breakpointColumnsObj}
                 className="my-masonry-grid"
                 columnClassName="my-masonry-grid_column"
               >
-                {data.map((item) => (
-                  <GridItem key={item.page_id} item={item} />
-                ))}
+                {data
+                  .filter(({ tags, name }) =>
+                    query
+                      ? name.toLowerCase().indexOf(query.toLowerCase()) !==
+                          -1 ||
+                        !!tags
+                          .split(',')
+                          .filter(
+                            (tag) =>
+                              tag
+                                .trim()
+                                .toLowerCase()
+                                .indexOf(query.toLowerCase()) !== -1,
+                          ).length
+                      : true,
+                  )
+                  .map((item) => (
+                    <GridItem key={item.page_id} item={item} />
+                  ))}
               </Masonry>
               {loadingData && <Loader />}
             </section>
