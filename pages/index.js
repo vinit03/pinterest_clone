@@ -63,32 +63,51 @@ const Home = () => {
         <Head>
           <title>Pinterest Clone</title>
           <meta charSet="utf-8" />
+          <link rel="icon" href="/favicon.ico" />
           <meta
             name="viewport"
             id="viewport"
             content="width=device-width, initial-scale=1"
           />
+          <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
           <meta name="description" content="Created by vinit.maniyar" />
-          <link rel="icon" href="/favicon.ico" />
+
+          <meta property="og:title" content="Pinterest Clone" />
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:image"
+            content="https://www.dcycle.design/assets/img/seo_logo.png"
+          />
+          <meta property="og:url" content="https://www.dcycle.design" />
+          <meta name="twitter:card" content="summary_large_image" />
+
+          <meta property="og:description" content="Created by vinit.maniyar" />
+          <meta property="og:site_name" content="Pinterest Clone" />
+          <meta
+            name="twitter:image:alt"
+            content="https://www.dcycle.design/assets/img/logo.png"
+          />
         </Head>
 
+        {data.length && (
+          <div className="my-4 px-8 py-3 sticky top-0 bg-white/70 z-10 rounded-b-xl">
+            <label className="block">
+              <input
+                type="text"
+                value={query}
+                onChange={handleQueryChange}
+                name="query"
+                className="px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                placeholder="Search Here"
+              />
+            </label>
+          </div>
+        )}
         <main className={'p-8'}>
           {!data.length && loadingData ? (
             <Loader />
           ) : (
             <section>
-              <div className="container mb-8">
-                <label className="block">
-                  <input
-                    type="text"
-                    value={query}
-                    onChange={handleQueryChange}
-                    name="query"
-                    className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                    placeholder="Search Here"
-                  />
-                </label>
-              </div>
               <Masonry
                 breakpointCols={breakpointColumnsObj}
                 className="my-masonry-grid"
