@@ -130,7 +130,11 @@ const Home = () => {
                       : true,
                   )
                   .map((item) => (
-                    <GridItem key={item.page_id} item={item} />
+                    <GridItem
+                      key={item.page_id}
+                      setQuery={setQuery}
+                      item={item}
+                    />
                   ))}
               </Masonry>
               {loadingData && <Loader />}

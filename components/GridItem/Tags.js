@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-const Tags = ({ tags }) => {
+const Tags = ({ tags, setQuery }) => {
   const [scroll, setScroll] = useState('left');
   const tagsEl = useRef(null);
 
@@ -15,7 +15,7 @@ const Tags = ({ tags }) => {
       top: 0,
       behavior: 'smooth',
     });
-    if (scrollTo + parentWidth >= width - 50) {
+    if (scrollTo + parentWidth >= width) {
       setScroll('right');
     } else if (scrollTo !== 0 && scroll !== 'inProgress') {
       setScroll('inProgress');
@@ -64,14 +64,16 @@ const Tags = ({ tags }) => {
             </button>
           )}
           {tags.map((tag) => (
-            <span
+            <button
+              type={'button'}
+              onClick={() => setQuery(tag)}
               key={tag}
               className={
                 'bg-gray-200 rounded-3xl text-xs font-medium py-1 px-2 inline-block cursor-pointer'
               }
             >
               {tag}
-            </span>
+            </button>
           ))}
           {scroll !== 'right' && (
             <button
@@ -118,6 +120,7 @@ const Tags = ({ tags }) => {
 
 Tags.propTypes = {
   tags: PropTypes.array,
+  setQuery: PropTypes.func,
 };
 
 export default Tags;

@@ -9,7 +9,7 @@ const ImageLink = ({ imageUrl, name, url }) => {
         href={url}
         target={'_blank'}
         className={`item-link overflow-hidden rounded-2xl block mb-2 ${
-          imgLoading ? `animate-pulse bg-grey` : ''
+          imgLoading ? `animate-pulse bg-grey h-52` : ''
         }`}
         rel="noreferrer"
         title={name}
@@ -19,9 +19,8 @@ const ImageLink = ({ imageUrl, name, url }) => {
             src={imageUrl}
             onLoad={() => setImageLoading(false)}
             alt={name}
-            className={'w-full h-full top-0 left-0 absolute object-cover'}
+            className={'w-full h-auto'}
           />
-          <img src={imageUrl} alt={name} className={'invisible'} />
           <div
             className={
               'absolute top-0 left-0 w-full h-full flex justify-center opacity-0 text-white font-medium text-2xl bg-black/70 items-center link-text transition-all'
@@ -32,9 +31,6 @@ const ImageLink = ({ imageUrl, name, url }) => {
         </div>
       </a>
       <style jsx={'true'}>{`
-        .item-link {
-          min-height: 200px;
-        }
         .item-link:hover .link-text {
           opacity: 1;
         }
