@@ -91,23 +91,25 @@ const Home = () => {
 
         {!!data.length && (
           <div className="my-4 px-8 py-3 sticky top-0 bg-white/70 z-10 rounded-b-xl">
-            <label className="block">
-              <input
-                type="text"
-                value={query}
-                onChange={handleQueryChange}
-                name="query"
-                className="px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                placeholder="Search Here"
-              />
-            </label>
+            <div className="custom-container">
+              <label className="block">
+                <input
+                  type="text"
+                  value={query}
+                  onChange={handleQueryChange}
+                  name="query"
+                  className="px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                  placeholder="Search Here"
+                />
+              </label>
+            </div>
           </div>
         )}
         <main className={'p-8'}>
           {!data.length && loadingData ? (
             <Loader />
           ) : (
-            <section>
+            <section className={'custom-container'}>
               <Masonry
                 breakpointCols={breakpointColumnsObj}
                 className="my-masonry-grid"
@@ -142,6 +144,14 @@ const Home = () => {
           )}
         </main>
       </div>
+      <style jsx={'true'}>
+        {`
+          .custom-container {
+            max-width: 2600px;
+            margin: auto;
+          }
+        `}
+      </style>
     </>
   );
 };
